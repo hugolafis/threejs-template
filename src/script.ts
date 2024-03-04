@@ -16,17 +16,15 @@ if (!canvas) {
 THREE.ColorManagement.enabled = true;
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
-  antialias: true,
+  antialias: true, // MSAA
 });
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+renderer.setPixelRatio(1); // for DPI scaling set to window.devicePixelRatio
+renderer.setSize(1, 1, false);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.LinearToneMapping;
 renderer.toneMappingExposure = 1.0;
 
 const viewer = new Viewer(renderer, canvas);
-const resizeObserver = new ResizeObserver(viewer.resize);
-resizeObserver.observe(canvas);
 
 function init() {
   clock.start();
